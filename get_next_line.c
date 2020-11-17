@@ -13,7 +13,7 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <fcntl.h>
-
+#define BUFFER_SIZE 9
 size_t	ft_strlen(const char *s)
 {
 	size_t cnt;
@@ -54,6 +54,8 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	ft_memcpy(conc_str, s1, s1_len);
 	ft_memcpy(conc_str + s1_len, s2, s2_len);
 	*(conc_str + s1_len + s2_len) = '\0';
+	free(s1);
+	free(s2);
 	return (conc_str);
 }
 
@@ -71,9 +73,10 @@ char	*add_remainder(char *buf)
 		return 0;
 	while (buf[len])
 		len++;
-	n_rem = calloc((len + 1) , sizeof(char));
+	n_rem = calloc((len) , sizeof(char));
 	if (!n_rem)
 		return (0);
+	buf++;
 	while (*buf)
 	{
 		n_rem[iter] = *buf;
@@ -87,14 +90,17 @@ char *set_line(char *str)
 {
 	char *line;
 	int i;
+	int len;
 
-	line = malloc(sizeof(char) * ft_strlen(str));
+	i = 0;
+	while (str[i] && str[i] != '\n')
+	    i++;
+	line = calloc(i + 1, sizeof(char));
 	if(!line)
 		return (0);
 	i = -1;
-	while (str[++i])
+	while (str[++i] && str[i] != '\n')
 		line[i] = str[i];
-	free(str);
 	return(line);
 }
 
@@ -106,7 +112,7 @@ int get_next_line(int fd, char **line)
 
 	if (fd < 0 || !line || BUFFER_SIZE <= 0)
 		return (0);
-	buf = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char));
+	buf = (char *)calloc((BUFFER_SIZE + 1) , sizeof(char));
 	if (!buf)
 		return(-1);
 	if (!read(fd, buf, BUFFER_SIZE))
@@ -116,13 +122,15 @@ int get_next_line(int fd, char **line)
 		return (0);
 	}
 	new_buf = ft_strjoin(remainder, buf);
-	free(buf);
+//	free(buf);
+//    free(remainder);
 	if (!new_buf)
 		return(-1);
-	free(remainder);
+
 	*line = set_line(new_buf);
-	remainder = add_remainder(buf);
+	remainder = add_remainder(new_buf);
 	if (!remainder)
 		return (-1);
-	return (1);
+	free(new_buf);
+    return (1);
 }
