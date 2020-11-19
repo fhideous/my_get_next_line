@@ -50,12 +50,12 @@ int main() {
     int i;
 
     char **text = calloc(7 , sizeof(char*));
-   fd = open("Z:/untitled/a.txt", O_RDONLY);
+   fd = open("Z:/untitled/khe/a.txt", O_RDONLY);
    i = 0;
    while (get_next_line(fd, text) == 1)
    {
-       text++;
-       i++;
+     //  text++;
+     //  i++;
    }
    text -= i;
     print_txt(text);
