@@ -13,7 +13,7 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <fcntl.h>
-#define BUFFER_SIZE 9
+#define BUFFER_SIZE 10
 size_t	ft_strlen(const char *s)
 {
 	size_t cnt;
@@ -69,11 +69,16 @@ char	*add_remainder(char *buf)
 	iter = 0;
 	while (*buf && *buf != '\n')
 		buf++;
-	if (!buf)
-		return 0;
+	if (!*buf)
+    {
+	    n_rem = calloc((1), sizeof(char));
+	    return (n_rem);
+    }
 	while (buf[len])
 		len++;
 	n_rem = calloc((len) , sizeof(char));
+	if (!n_rem)
+	    return(NULL);
 	if (!n_rem)
 		return (0);
 	buf++;
@@ -112,9 +117,10 @@ int get_next_line(int fd, char **line)
 
 	if (fd < 0 || !line || BUFFER_SIZE <= 0)
 		return (0);
-	buf = (char *)calloc((BUFFER_SIZE + 1) , sizeof(char));
+	buf = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char));
 	if (!buf)
 		return(-1);
+	buf[BUFFER_SIZE] = '\0';
 	if (!read(fd, buf, BUFFER_SIZE))
 	{
 		free(buf);
@@ -128,6 +134,7 @@ int get_next_line(int fd, char **line)
 		return(-1);
 
 	*line = set_line(new_buf);
+	free(remainder);
 	remainder = add_remainder(new_buf);
 	if (!remainder)
 		return (-1);
