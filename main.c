@@ -1,7 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include "fcntl.h"
+//#include "get_next_line.h"
 #include "get_next_line.c"
-
 /*
 char    *str_fill(char* dst, char *src, size_t len)
 {
@@ -37,7 +38,7 @@ int     test_ostar(char *str)
     return (2);
 }
 */
-void print_txt(char **text)
+static void print_txt(char **text)
 {
     while (*text)
         printf("%s", *text++);
@@ -50,7 +51,7 @@ int main() {
     int i;
 
     char **text = calloc(7 , sizeof(char*));
-   fd = open("Z:/untitled/khe/a.txt", O_RDONLY);
+   fd = open("/Users/fhideous/Desktop/fhideous/clion_gnl/a.txt", O_RDONLY);
    i = 0;
    while (get_next_line(fd, text) == 1)
    {
@@ -59,5 +60,6 @@ int main() {
    }
    text -= i;
     print_txt(text);
+
     return(0);
 }
