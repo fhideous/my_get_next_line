@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include "fcntl.h"
 //#include "get_next_line.h"
-#include "get_next_line.c"
+#include "get_next_line.h"
 /*
 char    *str_fill(char* dst, char *src, size_t len)
 {
@@ -47,11 +47,11 @@ static void print_txt(char **text)
 
 int main() {
 
-    int fd;
+    int fd = 0;
     int i;
 
-    char **text = calloc(7 , sizeof(char*));
-   fd = open("/Users/fhideous/Desktop/fhideous/clion_gnl/a.txt", O_RDONLY);
+    char **text = calloc(2 , sizeof(char*));
+ //  fd = open("/Users/fhideous/Desktop/fhideous/clion_gnl/a.txt", O_RDONLY);
    i = 0;
    while (get_next_line(fd, text) == 1)
    {

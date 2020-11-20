@@ -6,7 +6,7 @@
 /*   By: fhideous <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/13 20:45:41 by fhideous          #+#    #+#             */
-/*   Updated: 2020/11/15 20:37:41 by fhideous         ###   ########.fr       */
+/*   Updated: 2020/11/20 18:20:27 by fhideous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <stdlib.h>
@@ -14,8 +14,8 @@
 #include <unistd.h>
 #include "get_next_line.h"
 
-#define BUFFER_SIZE 3
-
+//#define BUFFER_SIZE 3
+/*
 size_t	ft_strlen(const char *s)
 {
     size_t cnt;
@@ -60,7 +60,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
     free((char*)s2);
     return (conc_str);
 }
-
+*/
 static char	*add_remainder(char *buf)
 {
 	int len;
