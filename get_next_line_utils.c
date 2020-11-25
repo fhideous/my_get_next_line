@@ -1,31 +1,21 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   get_next_line_utils.c                              :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: fhideous <marvin@42.fr>                    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/20 17:33:52 by fhideous          #+#    #+#             */
-/*   Updated: 2020/11/20 17:34:46 by fhideous         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "get_next_line.h"
 
-size_t			ft_strlen(const char *s)
+size_t	ft_strlen(const char *s)
 {
 	size_t cnt;
 
+	if (!s)
+		return (0);
 	cnt = 0;
 	while (*(s + cnt) != '\0')
 		cnt++;
 	return (cnt);
 }
 
-void			*ft_memcpy(void *dst, const void *src, size_t len)
+void	*ft_memcpy(void *dst, const void *src, size_t len)
 {
-	unsigned char		*ptr;
-	const unsigned char	*src_ptr;
+	unsigned char           *ptr;
+	const unsigned char     *src_ptr;
 
 	if (dst == NULL && src == NULL)
 		return (0);
@@ -36,12 +26,14 @@ void			*ft_memcpy(void *dst, const void *src, size_t len)
 	return (dst);
 }
 
-char			*ft_strjoin(char const *s1, char const *s2)
+char    *ft_strjoin(char const *s1, char const *s2)
 {
-	char		*conc_str;
-	size_t		s1_len;
-	size_t		s2_len;
+	char    *conc_str;
+	size_t  s1_len;
+	size_t  s2_len;
 
+	if (s1 == NULL && s2 == NULL)
+		return (NULL);
 	s1_len = ft_strlen(s1);
 	s2_len = ft_strlen(s2);
 	conc_str = (char *)malloc(s1_len + s2_len + 1);
@@ -50,7 +42,26 @@ char			*ft_strjoin(char const *s1, char const *s2)
 	ft_memcpy(conc_str, s1, s1_len);
 	ft_memcpy(conc_str + s1_len, s2, s2_len);
 	*(conc_str + s1_len + s2_len) = '\0';
-	free((char*)s1);
-	free((char*)s2);
 	return (conc_str);
 }
+
+char    *ft_substr(char const *s, unsigned int start, size_t len)
+{
+	char *sub_str;
+
+	if (s == NULL)
+		return (NULL);
+	if (start >= ft_strlen(s))
+	{
+		start = 0;
+		len = 0;
+	}
+	sub_str = (char *)malloc(len + 1);
+	if (!sub_str)
+		return (NULL);
+	ft_memcpy(sub_str, s + start, len);
+	*(sub_str + len) = '\0';
+	return (sub_str);
+}
+
+

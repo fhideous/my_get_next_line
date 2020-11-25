@@ -1,65 +1,67 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include "fcntl.h"
-//#include "get_next_line.h"
 #include "get_next_line.h"
+#include "stdio.h"
+#include "fcntl.h"
+
 /*
-char    *str_fill(char* dst, char *src, size_t len)
+int		main()
 {
-    int iter;
 
-    iter = 0;
-    dst = calloc((len + 1), sizeof(char));
-    while (len--)
-    {
-        *(dst + iter) = *(src + iter);
-        iter++;
-    }
-    dst[2] = "fuck, what the fuck";
-    dst[iter] = '\0';
-    return (dst);
-}
+	int fd = open("/Users/fhideous/Desktop/fhideous/gnl_v2/a", O_RDONLY);
+	char *line;
+	int i;
+int j = 0;
+	while((i = get_next_line(fd, &line)))
+	{
+		printf("%d: i = %d %s\n", j, i, line);
+		free(line);
+		j++;
+		if (j == 15)
+		{j++;}
+	}
+	printf("%d: i = %d %s",j , i, line);
+	close(fd);
 
-int     test_dstar(char **text_fl)
-{
-   // free(*text_fl);
-    //char *str = calloc(32, sizeof(char*));
-    //str = "Good bye";
-    *text_fl = "Good bye";
-    return (0);
-}
 
-int     test_ostar(char *str)
-{
-    char *c_str = calloc (32, sizeof(char));
-    c_str = "Changed str";
-    str = &c_str;
-    printf("%s", c_str);
-    return (2);
-}
 */
-static void print_txt(char **text)
-{
-    while (*text)
-        printf("%s", *text++);
-}
+	int main()
+	{
+		int             fd;
+		int             i;
+		int             j;
+		char    		*line = 0;
+		char			*lineadress[66];
 
+		j = 1;
 
-int main() {
+		printf("\n==========================================\n");
+		printf("========== TEST 1 : The Alphabet =========\n");
+		printf("==========================================\n\n");
 
-    int fd = 0;
-    int i;
+		if (!( fd = open("/Users/fhideous/Desktop/fhideous/gnl_v2/a", O_RDONLY)))
+		{
+			printf("\nError in open\n");
+			return (0);
+		}
+		while ((i = get_next_line(fd, &line)) > 0)
+		{
+		//	if (j == 65)
+		//		j++;
+			printf("|%s\n", line);
+			lineadress[j - 1] = line;
+			j++;
+		}
+		printf("|%s\n", line);
+		free(line);
+		close(fd);
 
-    char **text = calloc(2 , sizeof(char*));
- //  fd = open("/Users/fhideous/Desktop/fhideous/clion_gnl/a.txt", O_RDONLY);
-   i = 0;
-   while (get_next_line(fd, text) == 1)
-   {
-     //  text++;
-     //  i++;
-   }
-   text -= i;
-    print_txt(text);
-
-    return(0);
+		if (i == -1)
+			printf ("\nError in Fonction - Returned -1\n");
+		else if (j == 66)
+			printf("\nRight number of lines\n");
+		else if (j != 66)
+			printf("\nNot Good - Wrong Number Of Lines: %d\n", j);
+		while (--j > 0)
+			free(lineadress[j - 1]);
+		j = 1;
+	return (0);
 }
