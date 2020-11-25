@@ -36,7 +36,7 @@ int j = 0;
 		printf("\n==========================================\n");
 		printf("========== TEST 1 : The Alphabet =========\n");
 		printf("==========================================\n\n");
-
+	//	/Users/fhideous/Desktop/fhideous/gnl_v2/42TESTERS-GNL-master/files/4_newlines
 		if (!( fd = open("/Users/fhideous/Desktop/fhideous/gnl_v2/a", O_RDONLY)))
 		{
 			printf("\nError in open\n");
