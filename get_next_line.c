@@ -12,6 +12,7 @@
 
 #include "get_next_line.h"
 #include <stdio.h>
+#define BUFFER_SIZE 4
 
 int		find_transl(const char *str)
 {
@@ -42,6 +43,7 @@ int		add_line(char **line, char **donor, int n)
 	i = -1;
 	while (++i < n)
 		tmp[i] = *((*donor) + i);
+	//free(*line); /////////////////////////free or not to free?
 	*line = tmp;
 	if (!*donor)
 		return (1);
@@ -56,6 +58,7 @@ int		read_buf(int fd, char **rmd)
 {
 	int		count;
 	char	*buf_rd;
+	char	*joined;
 
 	if (!(buf_rd = calloc(BUFFER_SIZE + 1, sizeof(char))))
 		return (-1);
@@ -65,9 +68,11 @@ int		read_buf(int fd, char **rmd)
 		return (-1);
 	else if (count == 0)
 		return (0);
-	if (!(*rmd = ft_strjoin(*rmd, buf_rd)))
+	if (!(joined = ft_strjoin(*rmd, buf_rd)))
 		return (-1);
 	free(buf_rd);
+	free(*rmd);
+	*rmd = joined;
 	return (1);
 }
 
