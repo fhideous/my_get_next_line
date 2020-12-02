@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fhideous <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/12/02 17:22:58 by fhideous          #+#    #+#             */
+/*   Updated: 2020/12/02 17:23:01 by fhideous         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "get_next_line.h"
 
 size_t	ft_strlen(const char *s)
@@ -14,8 +26,8 @@ size_t	ft_strlen(const char *s)
 
 void	*ft_memcpy(void *dst, const void *src, size_t len)
 {
-	unsigned char           *ptr;
-	const unsigned char     *src_ptr;
+	unsigned char			*ptr;
+	const unsigned char		*src_ptr;
 
 	if (dst == NULL && src == NULL)
 		return (0);
@@ -26,11 +38,11 @@ void	*ft_memcpy(void *dst, const void *src, size_t len)
 	return (dst);
 }
 
-char    *ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
-	char    *conc_str;
-	size_t  s1_len;
-	size_t  s2_len;
+	char	*conc_str;
+	size_t	s1_len;
+	size_t	s2_len;
 
 	if (s1 == NULL && s2 == NULL)
 		return (NULL);
@@ -45,9 +57,9 @@ char    *ft_strjoin(char const *s1, char const *s2)
 	return (conc_str);
 }
 
-char    *ft_substr(char const *s, unsigned int start, size_t len)
+char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	char *sub_str;
+	char	*sub_str;
 
 	if (s == NULL)
 		return (NULL);
@@ -75,4 +87,3 @@ int		find_symb(const char *str, char c)
 		return (-2);
 	return (i);
 }
-
