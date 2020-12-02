@@ -68,7 +68,7 @@ int j = 0;
 		printf("======== TEST 3 : The Empty File =========\n");
 		printf("==========================================\n\n");
 
-		if (!(fd = open("/Users/fhideous/Desktop/fhideous/gnl_v2/a", O_RDONLY)))
+		if (!(fd = open("/Users/fhideous/Desktop/fhideous/gnl_v2/", O_RDONLY)))
 		{
 			printf("\nError in open\n");
 			return (0);
