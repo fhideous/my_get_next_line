@@ -27,19 +27,45 @@ int j = 0;
 //	/Users/fhideous/Desktop/fhideous/gnl_v2/42TESTERS-GNL-master/files/4_newlines
 //	/Users/fhideous/Desktop/fhideous/gnl_v2/a
 
-	int main()
-	{
-		int             fd;
-		int             i;
-		int             j;
-		char    		*line = 0;
-		char			*lineadress[66];
+	int main() {
+		int fd;
+		int i;
+		int j;
+		char *line = 0;
+		//	char			*lineadress[66];
 
 		j = 1;
 
 
 		printf("\n==========================================\n");
 		printf("========== TEST 1 : The Alphabet =========\n");
+		printf("==========================================\n\n");
+
+		if (!(fd = open("/Users/fhideous/Desktop/fhideous/gnl_v2/42TESTERS"
+				  "-GNL-master/files/1_newline", O_RDONLY))) {
+			printf("\nError in open\n");
+			return (0);
+		}
+		while ((i = get_next_line(fd, &line)) > 0) {
+			printf("|%s\n", line);
+			//lineadress[j - 1] = line;
+			j++;
+		}
+		printf("|%s\n", line);
+		free(line);
+		close(fd);
+
+		if (i == -1)
+			printf("\nError in Fonction - Returned -1\n");
+		else if (j == 66)
+			printf("\nRight number of lines\n");
+		else if (j != 66)
+			printf("\nNot Good - Wrong Number Of Lines: %d\n", j);
+		//	while (--j > 0)
+		//		free(lineadress[j - 1]);
+		j = 1;
+		printf("\n==========================================\n");
+		printf("======== TEST 3 : The Empty File =========\n");
 		printf("==========================================\n\n");
 
 		if (!(fd = open("/Users/fhideous/Desktop/fhideous/gnl_v2/a", O_RDONLY)))
@@ -50,7 +76,7 @@ int j = 0;
 		while ((i = get_next_line(fd, &line)) > 0)
 		{
 			printf("|%s\n", line);
-			//lineadress[j - 1] = line;
+			free(line);
 			j++;
 		}
 		printf("|%s\n", line);
@@ -59,13 +85,15 @@ int j = 0;
 
 		if (i == -1)
 			printf ("\nError in Fonction - Returned -1\n");
-		else if (j == 66)
+		else if (j == 1)
 			printf("\nRight number of lines\n");
-		else if (j != 66)
-			printf("\nNot Good - Wrong Number Of Lines: %d\n", j);
-	//	while (--j > 0)
-	//		free(lineadress[j - 1]);
+		else if (j != 1)
+			printf("\nNot Good - Wrong Number Of Lines\n");
 		j = 1;
+	//	sleep(10000);
+		return (0);
+
+	}
 /*
 		printf("\n==========================================\n");
 		printf("========= TEST 2 : Empty Lines ===========\n");
@@ -281,4 +309,4 @@ int j = 0;
 
 		return (0);
 */
-	}
+//	}
