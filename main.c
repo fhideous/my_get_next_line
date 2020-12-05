@@ -27,6 +27,28 @@ int j = 0;
 //	/Users/fhideous/Desktop/fhideous/gnl_v2/42TESTERS-GNL-master/files/4_newlines
 //	/Users/fhideous/Desktop/fhideous/gnl_v2/a
 
+int main() {
+	int ret;
+	char *line;
+
+	line = 0;
+	ret = get_next_line(0, &line);
+	while (ret > 0) {
+		write(1, line, ft_strlen(line));
+		write(1, "\n", 1);
+		free(line);
+		line = 0;
+		ret = get_next_line(0, &line);
+	}
+	if (ret == 0) {
+		write(1, line, ft_strlen(line));
+		write(1, "\n", 1);
+		free(line);
+		line = 0;
+	}
+}
+/*
+
 	int main() {
 		int fd;
 		int i;
@@ -36,7 +58,7 @@ int j = 0;
 
 		j = 1;
 
-
+	//	free(line);
 		printf("\n==========================================\n");
 		printf("========== TEST 1 : The Alphabet =========\n");
 		printf("==========================================\n\n");
@@ -46,12 +68,14 @@ int j = 0;
 			printf("\nError in open\n");
 			return (0);
 		}
-		while ((i = get_next_line(fd, &line)) > 0) {
+		while ((i = get_next_line(0, &line)) > 0) {
 			printf("|%s\n", line);
 			//lineadress[j - 1] = line;
+			free(line);
 			j++;
 		}
 		printf("|%s\n", line);
+
 		free(line);
 		close(fd);
 
@@ -68,12 +92,12 @@ int j = 0;
 		printf("======== TEST 3 : The Empty File =========\n");
 		printf("==========================================\n\n");
 
-		if (!(fd = open("/Users/fhideous/Desktop/fhideous/gnl_v2/", O_RDONLY)))
+		if (!(fd = open("/Users/fhideous/Desktop/fhideous/gnl_v2/a", O_RDONLY)))
 		{
 			printf("\nError in open\n");
 			return (0);
 		}
-		while ((i = get_next_line(fd, &line)) > 0)
+		while ((i = get_next_line(42, NULL)) > 0)
 		{
 			printf("|%s\n", line);
 			free(line);
