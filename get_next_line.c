@@ -12,7 +12,6 @@
 
 #include "get_next_line.h"
 #include <stdio.h>
-#define BUFFER_SIZE 4
 
 int		find_transl(const char *str)
 {
@@ -43,7 +42,6 @@ int		add_line(char **line, char **donor, int n)
 	i = -1;
 	while (++i < n)
 		tmp[i] = *((*donor) + i);
-	//free(*line); /////////////////////////free or not to free?
 	*line = tmp;
 	if (!*donor)
 		return (1);
@@ -83,6 +81,8 @@ int		get_next_line(int fd, char **line)
 	int			count;
 
 	count = 1;
+	if (!line || BUFFER_SIZE <= 0)
+		return (-1);
 	while (count != 0)
 	{
 		if ((is_tr = add_line(&*line, &remainder, find_transl(remainder))) ==
