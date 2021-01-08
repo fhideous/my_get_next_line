@@ -74,30 +74,37 @@ int		read_buf(int fd, char **rmd)
 	return (1);
 }
 
+void	ft_free(char **str)
+{
+	free(*str);
+	*str = NULL;
+}
+
 int		get_next_line(int fd, char **line)
 {
-	static char	*remainder;
+	static char	*rem;
 	int			is_tr;
 	int			count;
+	static int	is_first;
 
 	count = 1;
 	if (!line || BUFFER_SIZE <= 0)
 		return (-1);
 	while (count != 0)
 	{
-		if ((is_tr = add_line(&*line, &remainder, find_transl(remainder))) ==
-		-1)
+		if ((is_tr = add_line(&*line, &rem, find_transl(rem))) == -1)
 			return (-1);
 		if (is_tr == 1)
 			return (1);
-		if ((count = read_buf(fd, &remainder)) == -1)
+		if ((count = read_buf(fd, &rem)) == -1)
 			return (-1);
 	}
-	if (!*line && (!remainder || !*remainder))
+	if (!is_first)
+		*line = "\0";
+	if (!*line && (!rem || !*rem) && is_first++)
 		return (0);
-	if ((add_line(&*line, &remainder, ft_strlen(remainder))) == -1)
+	if ((add_line(&*line, &rem, ft_strlen(rem))) == -1)
 		return (-1);
-	free(remainder);
-	remainder = NULL;
+	ft_free(&rem);
 	return (0);
 }
