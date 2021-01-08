@@ -75,15 +75,3 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	*(sub_str + len) = '\0';
 	return (sub_str);
 }
-
-int		find_symb(const char *str, char c)
-{
-	int i;
-
-	i = 0;
-	while (*(str + i) && *(str + i) != c)
-		i++;
-	if (!*(str + i))
-		return (-2);
-	return (i);
-}

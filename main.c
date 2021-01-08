@@ -27,29 +27,11 @@ int j = 0;
 //	/Users/fhideous/Desktop/fhideous/gnl_v2/42TESTERS-GNL-master/files/4_newlines
 //	/Users/fhideous/Desktop/fhideous/gnl_v2/a
 
-int main() {
-	int ret;
-	char *line;
 
-	line = 0;
-	ret = get_next_line(0, &line);
-	while (ret > 0) {
-		write(1, line, ft_strlen(line));
-		write(1, "\n", 1);
-		free(line);
-		line = 0;
-		ret = get_next_line(0, &line);
-	}
-	if (ret == 0) {
-		write(1, line, ft_strlen(line));
-		write(1, "\n", 1);
-		free(line);
-		line = 0;
-	}
-}
-/*
 
-	int main() {
+
+	int main()
+	{
 		int fd;
 		int i;
 		int j;
@@ -58,36 +40,38 @@ int main() {
 
 		j = 1;
 
-	//	free(line);
-		printf("\n==========================================\n");
-		printf("========== TEST 1 : The Alphabet =========\n");
-		printf("==========================================\n\n");
-
-		if (!(fd = open("/Users/fhideous/Desktop/fhideous/gnl_v2/42TESTERS"
-				  "-GNL-master/files/1_newline", O_RDONLY))) {
-			printf("\nError in open\n");
-			return (0);
-		}
-		while ((i = get_next_line(0, &line)) > 0) {
-			printf("|%s\n", line);
-			//lineadress[j - 1] = line;
-			free(line);
-			j++;
-		}
-		printf("|%s\n", line);
-
-		free(line);
-		close(fd);
-
-		if (i == -1)
-			printf("\nError in Fonction - Returned -1\n");
-		else if (j == 66)
-			printf("\nRight number of lines\n");
-		else if (j != 66)
-			printf("\nNot Good - Wrong Number Of Lines: %d\n", j);
-		//	while (--j > 0)
-		//		free(lineadress[j - 1]);
-		j = 1;
+//		//	free(line);
+//		printf("\n==========================================\n");
+//		printf("========== TEST 1 : The Alphabet =========\n");
+//		printf("==========================================\n\n");
+//
+//		if (!(fd = open("/Users/fhideous/Desktop/fhideous/gnl_v2/42TESTERS"
+//						"-GNL-master/files/1_newline", O_RDONLY)))
+//		{
+//			printf("\nError in open\n");
+//			return (0);
+//		}
+//		while ((i = get_next_line(fd, &line)) > 0)
+//		{
+//			printf("|%s\n", line);
+//			//lineadress[j - 1] = line;
+//			free(line);
+//			j++;
+//		}
+//		printf("|%s\n", line);
+//
+//		free(line);
+//		close(fd);
+//
+//		if (i == -1)
+//			printf("\nError in Fonction - Returned -1\n");
+//		else if (j == 66)
+//			printf("\nRight number of lines\n");
+//		else if (j != 66)
+//			printf("\nNot Good - Wrong Number Of Lines: %d\n", j);
+//		//	while (--j > 0)
+//		//		free(lineadress[j - 1]);
+//		j = 1;
 		printf("\n==========================================\n");
 		printf("======== TEST 3 : The Empty File =========\n");
 		printf("==========================================\n\n");
@@ -97,33 +81,36 @@ int main() {
 			printf("\nError in open\n");
 			return (0);
 		}
-		while ((i = get_next_line(42, NULL)) > 0)
+		while ((i = get_next_line(fd, &line)) > 0)
 		{
 			printf("|%s\n", line);
 			free(line);
 			j++;
 		}
+//		if (i == -1)
+//			return (-1);
 		printf("|%s\n", line);
 		free(line);
 		close(fd);
 
 		if (i == -1)
-			printf ("\nError in Fonction - Returned -1\n");
+			printf("\nError in Fonction - Returned -1\n");
 		else if (j == 1)
 			printf("\nRight number of lines\n");
 		else if (j != 1)
 			printf("\nNot Good - Wrong Number Of Lines\n");
 		j = 1;
-	//	sleep(10000);
+		//	sleep(10000);
 		return (0);
 
-	}
-/*
+
 		printf("\n==========================================\n");
 		printf("========= TEST 2 : Empty Lines ===========\n");
 		printf("==========================================\n\n");
 
-		if (!(fd = open("/Users/fhideous/Desktop/fhideous/gnl_v2/42TESTERS-GNL-master/files/empty_lines", O_RDONLY)))
+		if (!(fd = open(
+				"/Users/fhideous/Desktop/fhideous/gnl_v2/42TESTERS-GNL-master/files/empty_lines",
+				O_RDONLY)))
 		{
 			printf("\nError in open\n");
 			return (0);
@@ -139,7 +126,7 @@ int main() {
 		close(fd);
 
 		if (i == -1)
-			printf ("\nError in Fonction - Returned -1\n");
+			printf("\nError in Fonction - Returned -1\n");
 		else if (j == 9)
 			printf("\nRight number of lines\n");
 		else if (j != 9)
@@ -149,7 +136,9 @@ int main() {
 		printf("======== TEST 3 : The Empty File =========\n");
 		printf("==========================================\n\n");
 
-		if (!(fd = open("/Users/fhideous/Desktop/fhideous/gnl_v2/42TESTERS-GNL-master/files/empty_file", O_RDONLY)))
+		if (!(fd = open(
+				"/Users/fhideous/Desktop/fhideous/gnl_v2/42TESTERS-GNL-master/files/empty_file",
+				O_RDONLY)))
 		{
 			printf("\nError in open\n");
 			return (0);
@@ -165,7 +154,7 @@ int main() {
 		close(fd);
 
 		if (i == -1)
-			printf ("\nError in Fonction - Returned -1\n");
+			printf("\nError in Fonction - Returned -1\n");
 		else if (j == 1)
 			printf("\nRight number of lines\n");
 		else if (j != 1)
@@ -176,7 +165,9 @@ int main() {
 		printf("========= TEST 4 : One New Line ==========\n");
 		printf("==========================================\n\n");
 
-		if (!(fd = open("/Users/fhideous/Desktop/fhideous/gnl_v2/42TESTERS-GNL-master/files/1_newline", O_RDONLY)))
+		if (!(fd = open(
+				"/Users/fhideous/Desktop/fhideous/gnl_v2/42TESTERS-GNL-master/files/1_newline",
+				O_RDONLY)))
 		{
 			printf("\nError in open\n");
 			return (0);
@@ -192,7 +183,7 @@ int main() {
 		close(fd);
 
 		if (i == -1)
-			printf ("\nError in Fonction - Returned -1\n");
+			printf("\nError in Fonction - Returned -1\n");
 		else if (j == 2)
 			printf("\nRight number of lines\n");
 		else if (j != 2)
@@ -203,7 +194,9 @@ int main() {
 		printf("========= TEST 5 : Four New Lines ========\n");
 		printf("==========================================\n\n");
 
-		if (!(fd = open("/Users/fhideous/Desktop/fhideous/gnl_v2/42TESTERS-GNL-master/files/4_newlines", O_RDONLY)))
+		if (!(fd = open(
+				"/Users/fhideous/Desktop/fhideous/gnl_v2/42TESTERS-GNL-master/files/4_newlines",
+				O_RDONLY)))
 		{
 			printf("\nError in open\n");
 			return (0);
@@ -219,7 +212,7 @@ int main() {
 		close(fd);
 
 		if (i == -1)
-			printf ("\nError in Fonction - Returned -1\n");
+			printf("\nError in Fonction - Returned -1\n");
 		else if (j == 5)
 			printf("\nRight number of lines\n");
 		else if (j != 5)
@@ -230,7 +223,9 @@ int main() {
 		printf("============== TEST 6 : 42 ===============\n");
 		printf("==========================================\n\n");
 
-		if (!(fd = open("/Users/fhideous/Desktop/fhideous/gnl_v2/42TESTERS-GNL-master/files/41_char", O_RDONLY)))
+		if (!(fd = open(
+				"/Users/fhideous/Desktop/fhideous/gnl_v2/42TESTERS-GNL-master/files/41_char",
+				O_RDONLY)))
 		{
 			printf("\nError in open\n");
 			return (0);
@@ -244,7 +239,9 @@ int main() {
 		printf("|%s\n", line);
 		free(line);
 		close(fd);
-		if (!(fd = open("/Users/fhideous/Desktop/fhideous/gnl_v2/42TESTERS-GNL-master/files/42_char", O_RDONLY)))
+		if (!(fd = open(
+				"/Users/fhideous/Desktop/fhideous/gnl_v2/42TESTERS-GNL-master/files/42_char",
+				O_RDONLY)))
 		{
 			printf("\nError in open\n");
 			return (0);
@@ -259,7 +256,9 @@ int main() {
 		printf("|%s\n", line);
 		free(line);
 		close(fd);
-		if (!(fd = open("/Users/fhideous/Desktop/fhideous/gnl_v2/42TESTERS-GNL-master/files/43_char", O_RDONLY)))
+		if (!(fd = open(
+				"/Users/fhideous/Desktop/fhideous/gnl_v2/42TESTERS-GNL-master/files/43_char",
+				O_RDONLY)))
 		{
 			printf("\nError in open\n");
 			return (0);
@@ -275,7 +274,7 @@ int main() {
 		close(fd);
 
 		if (i == -1)
-			printf ("\nError in Fonction - Returned -1\n");
+			printf("\nError in Fonction - Returned -1\n");
 		else if (j == 1)
 			printf("\nRight number of lines\n");
 		else if (j != 1)
@@ -287,12 +286,16 @@ int main() {
 
 		int fd2;
 
-		if (!(fd = open("/Users/fhideous/Desktop/fhideous/gnl_v2/42TESTERS-GNL-master/files/half_marge_top", O_RDONLY)))
+		if (!(fd = open(
+				"/Users/fhideous/Desktop/fhideous/gnl_v2/42TESTERS-GNL-master/files/half_marge_top",
+				O_RDONLY)))
 		{
 			printf("\nError in open\n");
 			return (0);
 		}
-		if (!(fd2 = open("/Users/fhideous/Desktop/fhideous/gnl_v2/42TESTERS-GNL-master/files/half_marge_bottom", O_RDONLY)))
+		if (!(fd2 = open(
+				"/Users/fhideous/Desktop/fhideous/gnl_v2/42TESTERS-GNL-master/files/half_marge_bottom",
+				O_RDONLY)))
 		{
 			printf("\nError in open\n");
 			return (0);
@@ -316,7 +319,7 @@ int main() {
 		close(fd2);
 
 		if (i == -1)
-			printf ("\nError in Fonction - Returned -1\n");
+			printf("\nError in Fonction - Returned -1\n");
 		else if (j == 25)
 			printf("\nRight number of lines\n");
 		else if (j != 25)
@@ -332,5 +335,5 @@ int main() {
 			printf("Not Good, you don't return -1 if no FD\n\n");
 
 		return (0);
-*/
+	}
 //	}
