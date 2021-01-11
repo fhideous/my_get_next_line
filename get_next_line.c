@@ -11,9 +11,8 @@
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#include <stdio.h>
 
-int		find_transl(const char *str)
+int             find_transl(const char *str)
 {
 	int i;
 
@@ -29,7 +28,7 @@ int		find_transl(const char *str)
 	return (-1);
 }
 
-int		add_line(char **line, char **donor, int n)
+int             add_line(char **line, char **donor, int n)
 {
 	char	*tmp;
 	char	*new_rmd;
@@ -37,7 +36,7 @@ int		add_line(char **line, char **donor, int n)
 
 	if (n < 0)
 		return (0);
-	if (!(tmp = calloc(n + 1, sizeof(char))))
+	if (!(tmp = ft_calloc(n + 1, sizeof(char))))
 		return (-1);
 	i = -1;
 	while (++i < n)
@@ -52,13 +51,13 @@ int		add_line(char **line, char **donor, int n)
 	return (1);
 }
 
-int		read_buf(int fd, char **rmd)
+static int		read_buf(int fd, char **rmd)
 {
 	int		count;
 	char	*buf_rd;
 	char	*joined;
 
-	if (!(buf_rd = calloc(BUFFER_SIZE + 1, sizeof(char))))
+	if (!(buf_rd = ft_calloc(BUFFER_SIZE + 1, sizeof(char))))
 		return (-1);
 	if ((count = read(fd, buf_rd, BUFFER_SIZE)) <= 0)
 		free(buf_rd);
@@ -74,13 +73,13 @@ int		read_buf(int fd, char **rmd)
 	return (1);
 }
 
-void	ft_free(char **str)
+static void     ft_free(char **str)
 {
 	free(*str);
 	*str = NULL;
 }
 
-int		get_next_line(int fd, char **line)
+int             get_next_line(int fd, char **line)
 {
 	static char	*rem;
 	int			is_tr;

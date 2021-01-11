@@ -15,6 +15,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 
+void	*ft_calloc(size_t count, size_t size);
 size_t	ft_strlen(const char *s);
 void	*ft_memcpy(void *dst, const void *src, size_t len);
 char	*ft_strjoin(char const *s1, char const *s2);
